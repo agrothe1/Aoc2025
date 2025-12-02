@@ -18,8 +18,8 @@ fun day1(pInput: List<String>): Int{
 }
 
 fun day2(pInput: List<String>){
-    val rgex=Regex("""(.+)\1{1,}""")
-    val x= pInput.flatMap{it.split(",")}
+    val rgex=Regex("""(.+)\1+""")
+    val x=pInput.flatMap{it.split(",")}
         .map{it.split("-")}
         .map{(it.first().toLong()..it.last().toLong())}
         .flatMap{it.toList()}
