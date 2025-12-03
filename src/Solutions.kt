@@ -2,7 +2,6 @@ import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.add
 import org.jetbrains.kotlinx.dataframe.api.forEach
 import org.jetbrains.kotlinx.dataframe.api.take
-import org.jetbrains.kotlinx.dataframe.api.toList
 import org.jetbrains.kotlinx.dataframe.io.read
 import java.io.File
 import kotlin.math.abs
@@ -28,10 +27,21 @@ fun day2(pInput: List<String>){
     println(x)
 }
 
+@Suppress("SimplifiableCallChain")
+fun day3(pInput: List<String>) =
+    pInput
+        .map{l->l.map{it.digitToInt()}}
+        .map{l->
+            l.flatMapIndexed{idx, frst->
+                l.drop(idx+1).map{scnd->Pair(frst, scnd)}
+            }.distinct().maxOf{it.first*10+it.second}
+        }.sum()
+
 fun main(){
     //val r=day1(File("input/Day1_exp.txt").readLines())
-    val r=day2(File("input/Day2.txt").readLines())
-    println()
+    //val r=day2(File("input/Day2.txt").readLines())
+    val r=day3(File("input/Day3.txt").readLines())
+    println(r)
 }
 
 fun mainx(){
